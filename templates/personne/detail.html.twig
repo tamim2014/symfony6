@@ -1,0 +1,14 @@
+{% extends 'template.html.twig' %}
+
+
+{% block body %}
+    <style></style>
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css')}}"> 
+    <div class="alert alert-success">
+        {{personne.nom}} {{personne.prenom}} : {{personne.age}} ans
+    </div>
+{% endblock %}
+
+{% block title %}
+      {{personne.nom}} {{personne.prenom}}
+{% endblock %}

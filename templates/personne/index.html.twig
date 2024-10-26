@@ -1,0 +1,52 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}liste des personnes{% endblock %}
+
+{% block body %}
+<style>
+    .card:hover {  background: #ececea !important; }  
+</style>
+<link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css')}}">
+
+  <div class="row">
+        {% for personne in personnes %}
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"> {{personne.prenom}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{personne.nom}} {{personne.prenom}}</h6>
+              <p class="card-text">Age: {{personne.age}} ans</p>
+              
+              <a href="{{ path('personne.detail', {id:personne.id}) }}" class="card-link">Détails</a>
+              <a href="{{ path('personne.delete', {id:personne.id}) }}" class="card-link">Delete</a>
+              
+              <a href="{{ path('personne.edit', {id:personne.id}) }}" class="card-link">Edit</a>
+              
+              
+            </div>
+          </div>
+        {% endfor %} 
+  </div>
+  {% if isPaginated %}
+    <div class="row mt-3">
+      <nav aria-label="col Page navigation example">
+          <ul class="pagination">
+            {% if (page != 1) %}
+            <li class="page-item"><a class="page-link" href="{{ path('personne.list.alls', {page:page-1, nbre:nbre}) }}">Previous</a></li>
+            {% endif %}
+            {% for i in range(1, nbrePage) %}
+            <li class="page-item"><a class="page-link" href="{{ path('personne.list.alls', {page:i, nbre:nbre}) }}">{{i}}</a></li>
+            {% endfor %}
+            {% if (page != nbrePage) %}
+            <li class="page-item"><a class="page-link" href="{{ path('personne.list.alls', {page:page+1, nbre:nbre}) }}">Next</a></li>
+            {% endif %}
+          </ul>
+      </nav>
+    </div>
+  {% endif %} 
+
+ 
+
+ 
+
+
+{% endblock %}
